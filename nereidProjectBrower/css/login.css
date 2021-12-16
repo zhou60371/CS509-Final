@@ -1,0 +1,17 @@
+html,body {
+    height: 100vh;
+  }
+
+.entrance{
+    margin-top: 20px;
+}
+
+.entrance span{
+    padding-top: 10px;
+    float: right;
+}
+.mindText{
+    padding-top: 20px;
+    font-size: 15px;
+    text-align: center;
+}

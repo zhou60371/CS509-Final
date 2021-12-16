@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+
+    <title>register page</title>
+    <style>
+        div.mask {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 3;
+            display: none;
+        }
+
+        #spinner {
+            text-align: center;
+            margin-top: 20px;
+            z-index: 999;
+        }
+
+        #menue1 {
+            position: absolute;
+            top: -100px;
+            display: none;
+        }
+
+        #menue2 {
+            position: absolute;
+            top: -100px;
+            display: none;
+        }
+
+        #dropdownAction {
+            visibility: hidden;
+        }
+
+        .addClassificationBoard {
+            display: none;
+        }
+
+        .addClassificationBoard1 {
+            display: none;
+        }
+
+        .addAlgorithmBoard {
+            display: none;
+        }
+
+        .uploadImplementationBoard {
+            display: none;
+        }
+
+        .algoGroup1 {
+            display: none;
+        }
+
+        .algoGroup2 {
+            display: none;
+        }
+
+        .algoGroup3 {
+            display: none;
+        }
+
+        .algoGroup4 {
+            display: none;
+        }
+
+        .checkBox {
+
+            float: right;
+            display: none;
+        }
+
+        .confirmReclassifyAlgoBoard {
+            display: none;
+        }
+
+        .confirmReclassifyAlgoBoard2 {
+            display: none;
+        }
+
+        .mergeBoard1 {
+            display: none;
+        }
+
+        .mergeBoard2 {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mask bg-secondary opacity-50"></div>
+    <div class="container">
+        <div class="row mb-3">
+            <div id="spinner" class="col-md-4 offset-md-4">
+                <div id="spinner" class="spinner-border col-sm-3 offset-md-1" role="status">
+                    <span class="visually-hidden .align-middle">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <!--------------------------------------- actiion面板 -------------------------------------->
+        <div class="row mb-3">
+            <div id="dropdownAction" class="dropdown col-md-2 offset-md-9">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Actions
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li id="addTopClassification"><a class="dropdown-item" href="#">Add top Classification</a></li>
+                    <li id="reclassifyAlgorithm"><a class="dropdown-item" href="#">Reclassify Algorithm</a></li>
+                    <li id="mergeSibilingClassification"><a class="dropdown-item" href="#">Merge Sibiling
+                            Classifications</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!------------------------------------------- 主体 --------------------------------------------->
+        <div class="row mb-3">
+            <div id="box" class="col-md-4 offset-md-4"></div>
+        </div>
+
+        <div class="row mb-3 algoGroup1">
+            <button id="reclassifyButton1" type="button"
+                class="col-md-2 offset-md-3 btn btn-primary">Reclassify</button>
+            <button id="reclassifyCloseButton1" type="button"
+                class="col-md-2 offset-md-1 btn btn-secondary">Close</button>
+        </div>
+        <div class="row mb-3 algoGroup2">
+            <button id="reclassifyButton2" type="button" class="col-md-2 offset-md-3 btn btn-primary">Next</button>
+            <button id="reclassifyCloseButton2" type="button"
+                class="col-md-2 offset-md-1 btn btn-secondary">Close</button>
+        </div>
+
+        <div class="row mb-3 algoGroup3">
+            <button id="mergeButton3" type="button" class="col-md-2 offset-md-3 btn btn-primary">Next</button>
+            <button id="mergeCloseButton3" type="button" class="col-md-2 offset-md-1 btn btn-secondary">Close</button>
+        </div>
+        <div class="row mb-3 algoGroup4">
+            <button id="mergeButton4" type="button" class="col-md-2 offset-md-3 btn btn-primary">Merge</button>
+            <button id="mergeCloseButton4" type="button" class="col-md-2 offset-md-1 btn btn-secondary">Close</button>
+        </div>
+        <!----------------------------------------- menue1 子节点-------------------------------------------->
+        <div id="menue1" class="list-group col-md-2">
+            <button type="button" class="addSubClassification list-group-item list-group-item-action"
+                aria-current="true">
+                Add sub Classification
+            </button>
+            <button type="button" class="addAlgorithmButton list-group-item list-group-item-action">
+                Add Algorithm
+            </button>
+            <!-- <button type="button" class="list-group-item list-group-item-action" disabled>...</button> -->
+            <!-- <button type="button" class="list-group-item list-group-item-action">delete classification</button> -->
+        </div>
+
+        <!------------------------------------- menue2 添加implementation ------------------>
+        <div id="menue2" class="list-group col-md-2">
+            <button type="button" class="uploadImplementationButton list-group-item list-group-item-action"
+                aria-current="true">
+                Add an Implementation
+            </button>
+            <!-- <button type="button" class="list-group-item list-group-item-action" disabled>...</button> -->
+        </div>
+
+        <!-- reclassify确认面板 -->
+        <div
+            class="confirmReclassifyAlgoBoard shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle col-md-3">
+            <div>
+                <p class="text-center fw-bold">Choose an algorithm that you want to reclassify.</p>
+                <div class="row">
+                    <button id="confirmReclassifyAlgoBoardButton" class="btn btn-primary">Confirm</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div
+            class="confirmReclassifyAlgoBoard2 shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle col-md-3">
+            <div>
+                <p class="text-center fw-bold">Choose a new classification.</p>
+                <div class="row">
+                    <button id="confirmReclassifyAlgoBoardButton2" class="btn btn-primary">Confirm</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- merge 确认面板 -->
+        <div
+            class="mergeBoard1 shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle col-md-3">
+            <div>
+                <p class="text-center fw-bold">Choose a classification that you want to move from.</p>
+                <div class="row">
+                    <button id="mergeBoardButton1" class="btn btn-primary">Confirm</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div
+            class="mergeBoard2 shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle col-md-3">
+            <div>
+                <p class="text-center fw-bold">Choose a classification that you want to move to.</p>
+                <div class="row">
+                    <button id="mergeBoardButton2" class="btn btn-primary">Confirm</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-------------------------------------- 创建classification --------------------------------------->
+        <div
+            class="addClassificationBoard shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle col-md-3">
+            <form name="addTopClassification">
+                <div class="mb-3">
+                    <p class="text-center fw-bold">Add Top Classification</p>
+                </div>
+                <div class="mb-3">
+                    <label for="inputNewClassificationName" class="form-label">New Top Classification Name</label>
+                    <input name="arg1" type="text" class="form-control" id="inputNewClassificationName"
+                        placeholder="Enter name">
+
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="addTopSubmit btn btn-primary">Submit</button>
+                    <button type="button" class="addTopConcel btn btn-secondary">Concel</button>
+                </div>
+            </form>
+        </div>
+        <div
+            class="addClassificationBoard1 shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle col-md-3">
+            <form name="addSubClassification">
+                <div class="mb-3">
+                    <p class="text-center fw-bold">Add Sub Classification</p>
+                </div>
+                <div class="mb-3">
+                    <label for="inputNewSubClassificationName" class="form-label">New Sub Classification Name</label>
+                    <input name="arg1" type="text" class="form-control" id="inputNewSubClassificationName"
+                        placeholder="Enter name">
+
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="addSubSubmit btn btn-primary">Submit</button>
+                    <button type="button" class="addSubConcel btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!-------------------------------------------------- 创建算法 ------------------------------------------>
+        <div
+            class="addAlgorithmBoard shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle col-md-4">
+
+            <form name="addAlgorithm">
+                <div class="mb-3">
+                    <p class="text-center fw-bold">Add Algorithm</p>
+                </div>
+                <div class="mb-3">
+                    <label for="inputNewAlgorithmName" class="form-label">New Algorithm Name</label>
+                    <input name="arg1" type="text" class="form-control" id="inputNewAlgorithmName"
+                        placeholder="Enter An Unique Name">
+                </div>
+                <div class="mb-3">
+                    <label for="inputNewAlgorithmDescription" class="form-label">Description</label>
+                    <input name="arg2" type="text" class="form-control" id="inputNewAlgorithmDescription"
+                        placeholder="Enter Brief Description">
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="addAlgoSubmit btn btn-primary">Submit</button>
+                    <button type="button" class="addAlgoConcel btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!------------------------------------------ 创建implementation ------------------------------------------>
+        <div
+            class="uploadImplementationBoard shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle col-md-8">
+            <form name="uploadImplementation">
+                <div class="mb-3">
+                    <p class="text-center fw-bold">Add Implementation</p>
+                </div>
+                <div class="mb-3">
+                    <label for="inputNewImplementationLanguage" class="form-label">Code Language</label>
+                    <input name="arg1" type="text" class="form-control" id="inputNewImplementationLanguage"
+                        placeholder="Enter language">
+                </div>
+                <div class="mb-3">
+                    <label for="inputNewImplementationContent" class="form-label">Code Content</label>
+                    <textarea name="arg2" type="text" style="height: 300px" class="form-control"
+                        id="inputNewImplementationContent" placeholder="Enter your code"></textarea>
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="addImplementationSubmit btn btn-primary">Submit</button>
+                    <button type="button" class="addImplementationConcel btn btn-secondary">Concel</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/indexPage.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

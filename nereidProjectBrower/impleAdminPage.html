@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+    <style>
+        #spinner {
+            text-align: center;
+            margin-top: 20px;
+            z-index: 999;
+        }
+
+        .xx {
+            margin: 5px;
+        }
+
+        .addbenchmark {
+            display: none;
+        }
+
+        .deleteBenchmarkBoard {
+            display: none;
+        }
+
+        .deleteProblemInstanceBoard {
+            display: none;
+        }
+
+        div.mask {
+            position: relative;
+            width: 100%;
+            height: 150%;
+            position: absolute;
+            z-index: 2;
+            display: none;
+        }
+
+        i.bi-x-circle-fill {
+            color: red;
+        }
+
+        i.bi-file-earmark-x-fill {
+            color: red;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mask bg-secondary opacity-50"></div>
+    <div class="contatiner" style="padding-top: 40px;">
+        <div class="row mb-3">
+            <div id="spinner" class="col-md-4 offset-md-4">
+                <div id="spinner" class="spinner-border col-sm-3 offset-md-1" role="status">
+                    <span class="visually-hidden .align-middle">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div id="dropdownAction" class="dropdown col-md-2 offset-md-9">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Actions
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a id="removeImple" class="dropdown-item" href="#" disabled>Remove Implementation</a></li>
+                    <!-- <li><a class="dropdown-item" href="#">...</a></li> -->
+                </ul>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <h1 id="algorithmName" class="col-md-8 offset-md-2"></h1>
+        </div>
+        <div class="row mb-3 col-md-8 offset-md-2">
+            <p id="algorithmDescription"></p>
+        </div>
+        <div class="row mb-3">
+            <h3 id="impleName" class="col-md-8 offset-md-2"></h3>
+            <pre class="col-md-8 offset-md-2 shadow p-3 mb-5 bg-body rounded">
+                <code id="impleContent">
+                </code>
+            </pre>
+        </div>
+        <!--------------------------------------------benchmark板块----------------------------------------->
+        <!-- <div class="col-md-8 offset-md-2 shadow p-3 mb-5 bg-body rounded">
+            <p><i class="bi bi-person-circle"></i> username</p>
+            <div class="row mb-3">
+                <span class="col-md-3">Best Case:</span>
+                <a class="col-md-1" href="#">
+                    <i class="bi bi-file-earmark-text"></i>
+                </a>
+                <div class="col-md-3"><i class="bi bi-file-earmark-x-fill"></i></div>
+
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 rounded-3 bg-dark text-light">
+                    <div class="row">
+                        <i class="bi bi-x-circle-fill col-md-2 offset-md-10"></i>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            CPU: 11900T
+                        </div>
+                        <div class="col-md-4">
+                            L1: 256KB
+                        </div>
+                        <div class="col-md-4">
+                            L2: 1MB
+                        </div>
+                        <div class="col-md-4">
+                            L3: 8MB
+                        </div>
+                        <div class="col-md-4">
+                            threads: 262
+                        </div>
+                        <div class="col-md-4">
+                            cores: 8
+                        </div>
+                        <div class="col-md-4">
+                            cache: 10MB
+                        </div>
+                        <div class="col-md-4">
+                            date: 2020-1-2
+                        </div>
+                        <div class="col-md-4">
+                            running time: 30000ms
+                        </div>
+                    </div>
+                </div>
+                <div class="xx col-md-4 rounded-3 bg-dark text-light">
+                    <div class="row">
+                        <div class="col-md-4">
+                            CPU: 11900T
+                        </div>
+                        <div class="col-md-4">
+                            L1: 256KB
+                        </div>
+                        <div class="col-md-4">
+                            L2: 1MB
+                        </div>
+                        <div class="col-md-4">
+                            L3: 8MB
+                        </div>
+                        <div class="col-md-4">
+                            threads: 262
+                        </div>
+                        <div class="col-md-4">
+                            cores: 8
+                        </div>
+                        <div class="col-md-4">
+                            cache: 10MB
+                        </div>
+                        <div class="col-md-4">
+                            date: 2020-1-2
+                        </div>
+                        <div class="col-md-4">
+                            running time: 30000ms
+                        </div>
+                    </div>
+                </div>
+                <div>Worst Case: <a href="#"><i class="bi bi-file-earmark-text"></i></a></div>
+            </div>
+        </div> -->
+        <div class="containerBenckmark"></div>
+
+        <!--------------------------------------- delete problem instance -------------------------------->
+        <div
+            class="deleteBenchmarkBoard shadow p-3 mb-5 bg-body rounded position-absolute start-50 translate-middle col-md-6">
+            <div class="row mb-3">
+                <p class="text-center fw-bold">Are you sure want to delete this benchmark?</p>
+            </div>
+            <div class="row mb3">
+                <button class="col-md-3 offset-md-2 deletBkBtn btn btn-danger">Delete</button>
+                <button class="col-md-3 offset-md-2 cancelDeleteBkBtn btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+
+        <!---------------------------------------- delete problem instance ------------------------------->
+        <div
+            class="deleteProblemInstanceBoard shadow p-3 mb-5 bg-body rounded position-absolute start-50 translate-middle col-md-6">
+            <div class="row mb-3">
+                <p class="text-center fw-bold">Are you sure want to delete this problem instance?</p>
+            </div>
+            <div class="row mb3">
+                <button class="col-md-3 offset-md-2 deletPIBtn btn btn-danger">Delete</button>
+                <button class="col-md-3 offset-md-2 cancelDeletePIBtn btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="js/api.js"></script>
+    <script src="js/impleAdminPage.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

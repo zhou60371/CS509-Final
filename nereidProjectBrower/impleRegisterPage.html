@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+    <style>
+        #spinner {
+            text-align: center;
+            margin-top: 20px;
+            z-index: 999;
+        }
+
+        .addProblemInstance {
+            display: none;
+        }
+
+        .xx {
+            margin: 5px;
+            padding-top: 30px;
+        }
+
+        .addbenchmark {
+            display: none;
+        }
+
+        div.mask {
+            width: 100%;
+            height: 150%;
+            position: absolute;
+            z-index: 2;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mask bg-secondary opacity-50"></div>
+    <div class="container" style="padding-top: 40px;">
+        <div class="row mb-3">
+            <div id="spinner" class="col-md-4 offset-md-4">
+                <div id="spinner" class="spinner-border col-sm-3 offset-md-1" role="status">
+                    <span class="visually-hidden .align-middle">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <!----------------------------------------- 添加problem instance --------------------------------------->
+        <div
+            class="addProblemInstance shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle col-md-3">
+            <form name="addProblemInstance">
+                <div class="mb-3">
+                    <p class="text-center fw-bold">Add Problem Instance</p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Case Type</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                value="option1" checked>
+                            <label class="form-check-label" for="inlineRadio1">Best Case</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                value="option2">
+                            <label class="form-check-label" for="inlineRadio2">Worst Case</label>
+                        </div>
+                    </div>
+                    <label for="fileUpload" class="form-label">File Upload</label>
+                    <input class="form-control" name="fileUpload" type="file" id="fileUpload">
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="addPISubmit btn btn-primary">Submit</button>
+                    <button type="button" class="addPICancel btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!---------------------------------------------- 添加benchmark -------------------------------------------->
+        <div class="addbenchmark shadow p-3 mb-5 bg-body rounded position-absolute start-50 translate-middle col-md-6">
+            <form name="addBenchmark" class="addBenchmark">
+                <div class="mb-3">
+                    <p class="text-center fw-bold">Add Benchmark</p>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="cpu" class="form-label">CPU</label>
+                        <input class="form-control" name="cpu" type="text" id="bk_cpu">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="thread" class="form-label">Thread</label>
+                        <input class="form-control" name="thread" type="text" id="bk_thread">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="cores" class="form-label">Cores</label>
+                        <input class="form-control" name="cores" type="text" id="bk_cores">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="L1" class="form-label">L1</label>
+                        <input class="form-control" name="L1" type="text" id="bk_L1">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="L2" class="form-label">L2</label>
+                        <input class="form-control" name="L2" type="text" id="bk_L2">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="L3" class="form-label">L3</label>
+                        <input class="form-control" name="L3" type="text" id="bk_L3">
+                    </div>
+                    <div class="col-md-8">
+                        <label for="Cache" class="form-label">Cache</label>
+                        <input class="form-control" name="cache" type="text" id="bk_cache">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="runningTime" class="form-label">Running time</label>
+                        <input class="form-control" name="runningTime" type="text" id="bk_runningTime">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="addBkSubmit btn btn-primary">Submit</button>
+                    <button type="button" class="addBkCancel btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!----------------------------------------------- action面板 ------------------------------------------------>
+        <div class="row mb-3">
+            <div id="dropdownAction" class="dropdown col-md-2 offset-md-9">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Actions
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" id="addPI" href="#" disabled>Add Problem Instance</a></li>
+                    <!-- <li><a class="dropdown-item" href="#">...</a></li> -->
+                </ul>
+            </div>
+        </div>
+        <!---------------------------------------------------- algorithm板块 ------------------------------------------>
+        <div class="row mb-3">
+            <h1 id="algorithmName" class="col-md-8 offset-md-2"></h1>
+        </div>
+        <div class="row mb-3 col-md-8 offset-md-2">
+            <p id="algorithmDescription"></p>
+        </div>
+        <div class="row mb-3">
+            <h3 id="impleName" class="col-md-7 offset-md-2"></h3>
+            <div id="downloadImple" class="col-md-2"><i class="bi bi-download"></i></div>
+            <pre class="col-md-8 offset-md-2 shadow p-3 mb-5 bg-body rounded">
+                <code id="impleContent">
+                </code>
+            </pre>
+        </div>
+        <!--------------------------------------------benchmark板块----------------------------------------->
+        <!-- <div class="col-md-8 offset-md-2 shadow p-3 mb-5 bg-body rounded">
+            <p><i class="bi bi-person-circle"></i> username</p>
+            <div class="row mb-3">
+                <span class="col-md-3">Best Case:</span><a class="col-md-1" href="#"><i
+                        class="bi bi-file-earmark-text"></i></a>
+                <button type="button" class="btn btn-secondary col-md-4 offset-md-4">Add Benchmark</button>
+            </div>
+            <div class="row">
+                <div class="xx col-md-4 rounded-3 bg-dark text-light">
+                    <div class="row">
+                        <div class="col-md-4">
+                            CPU: 11900T
+                        </div>
+                        <div class="col-md-4">
+                            L1: 256KB
+                        </div>
+                        <div class="col-md-4">
+                            L2: 1MB
+                        </div>
+                        <div class="col-md-4">
+                            L3: 8MB
+                        </div>
+                        <div class="col-md-4">
+                            threads: 262
+                        </div>
+                        <div class="col-md-4">
+                            cores: 8
+                        </div>
+                        <div class="col-md-4">
+                            cache: 10MB
+                        </div>
+                        <div class="col-md-4">
+                            date: 2020-1-2
+                        </div>
+                        <div class="col-md-4">
+                            running time: 30000ms
+                        </div>
+                    </div>
+                </div>
+                <div class="xx col-md-4 rounded-3 bg-dark text-light">
+                    <div class="row">
+                        <div class="col-md-4">
+                            CPU: 11900T
+                        </div>
+                        <div class="col-md-4">
+                            L1: 256KB
+                        </div>
+                        <div class="col-md-4">
+                            L2: 1MB
+                        </div>
+                        <div class="col-md-4">
+                            L3: 8MB
+                        </div>
+                        <div class="col-md-4">
+                            threads: 262
+                        </div>
+                        <div class="col-md-4">
+                            cores: 8
+                        </div>
+                        <div class="col-md-4">
+                            cache: 10MB
+                        </div>
+                        <div class="col-md-4">
+                            date: 2020-1-2
+                        </div>
+                        <div class="col-md-4">
+                            running time: 30000ms
+                        </div>
+                    </div>
+                </div>
+                <div>Worst Case: <a href="#"><i class="bi bi-file-earmark-text"></i></a></div>
+            </div> -->
+        <div class="containerBenckmark"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="js/api.js"></script>
+    <script src="js/impleRegisterPage.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
