@@ -25,10 +25,9 @@ public class DeleteRegisteredUserHandler implements RequestHandler<DeleteRegiste
 		try {
 			if(dao.deleteUser(req.name)) {
 				response = new DeleteRegisteredUserResponse(200);
+			}else {
+				response = new DeleteRegisteredUserResponse(422,"Unable to delete problem instace");
 			}
-//			else {
-//				response = new DeleteRegisteredUserResponse(422,"Unable to delete problem instace");
-//			}
 		}catch(Exception e){
 			response = new DeleteRegisteredUserResponse(403, "Unable to delete problem instance: (" + e.getMessage() + ")");
 		}

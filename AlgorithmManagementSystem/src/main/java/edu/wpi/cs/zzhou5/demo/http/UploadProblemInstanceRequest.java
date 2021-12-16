@@ -8,30 +8,30 @@ public class UploadProblemInstanceRequest {
 	public int algo;
 	public String user;
 	
-//	public int getCaseType() {
-//		return caseType;
-//	}
-//	public void setCaseType(int caseType) {
-//		this.caseType = caseType;
-//	}
-//	public String getContent() {
-//		return content;
-//	}
-//	public void setContent(String content) {
-//		this.content = content;
-//	}
-//	public int getAlgo() {
-//		return algo;
-//	}
-//	public void setAlgo(int algo) {
-//		this.algo = algo;
-//	}
-//	public String getUser() {
-//		return user;
-//	}
-//	public void setUser(String user) {
-//		this.user = user;
-//	}
+	public int getCaseType() {
+		return caseType;
+	}
+	public void setCaseType(int caseType) {
+		this.caseType = caseType;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public int getAlgo() {
+		return algo;
+	}
+	public void setAlgo(int algo) {
+		this.algo = algo;
+	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
 	public UploadProblemInstanceRequest() {}
 	public UploadProblemInstanceRequest(int caseType, String content, int algo, String user) {
 		// TODO Auto-generated constructor stub

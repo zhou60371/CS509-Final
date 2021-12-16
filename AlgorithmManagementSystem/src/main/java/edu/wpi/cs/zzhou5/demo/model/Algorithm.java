@@ -10,12 +10,12 @@ public class Algorithm {
 	public int classification;
 	public List<Implementation> imples;
 	
-//	public Algorithm(String name,int classification) {
-//		this.name = name;
-//		this.classification = classification;
-//		this.id = -1;
-//		this.imples = new ArrayList<>();
-//	}
+	public Algorithm(String name,int classification) {
+		this.name = name;
+		this.classification = classification;
+		this.id = -1;
+		this.imples = new ArrayList<>();
+	}
 	
 	public Algorithm(String name,int classification,String description) {
 		this.name = name;

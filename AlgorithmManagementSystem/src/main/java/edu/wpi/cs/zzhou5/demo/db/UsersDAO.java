@@ -52,9 +52,9 @@ public class UsersDAO {
             
             // already present?
             while (resultSet.next()) {
-//                User c = generateUser(resultSet);
-//                resultSet.close();
-//                return false;
+                User c = generateUser(resultSet);
+                resultSet.close();
+                return false;
             }
 
             ps = conn.prepareStatement("INSERT INTO " + tblName + " (username,password,role) values(?,?,?);");
@@ -116,8 +116,8 @@ public class UsersDAO {
 			ps.setString(1,name);
 			ResultSet resultSet = ps.executeQuery();
 			while(resultSet.next()) {
-//				Activity activity = generateActivity(resultSet);
-//				activities.add(activity);
+				Activity activity = generateActivity(resultSet);
+				activities.add(activity);
 			}
 			return activities;
 		}catch(Exception e) {
@@ -132,10 +132,10 @@ public class UsersDAO {
         return new User (username, password,role);
     }
 	
-//	private Activity generateActivity(ResultSet resultSet) throws Exception{
-//		String user = resultSet.getString("user");
-//		String time = resultSet.getString("time");
-//		String activity = resultSet.getString("activity");
-//		return new Activity(user,time,activity);
-//	}
+	private Activity generateActivity(ResultSet resultSet) throws Exception{
+		String user = resultSet.getString("user");
+		String time = resultSet.getString("time");
+		String activity = resultSet.getString("activity");
+		return new Activity(user,time,activity);
+	}
 }

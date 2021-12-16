@@ -25,10 +25,9 @@ public class DeleteClassificationHandler  implements RequestHandler<DeleteClassi
 		try {
 			if(dao.deleteClassification(req.id)) {
 				response = new DeleteClassificationResponse(200);
+			}else {
+				response = new DeleteClassificationResponse(422,"Unable to delete benchmark");
 			}
-//			else {
-//				response = new DeleteClassificationResponse(422,"Unable to delete benchmark");
-//			}
 		}catch(Exception e){
 			response = new DeleteClassificationResponse(403, "Unable to delete benchmark: (" + e.getMessage() + ")");
 		}

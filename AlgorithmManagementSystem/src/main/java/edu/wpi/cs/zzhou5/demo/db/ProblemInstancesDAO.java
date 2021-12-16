@@ -56,7 +56,7 @@ public class ProblemInstancesDAO {
 			ps1.setInt(1, id);
 			ResultSet resultSet1 = ps1.executeQuery();
 			if(!resultSet1.next()){
-//				return null;
+				return null;
 			}	
 			resultSet1.beforeFirst();
 			while(resultSet1.next()) {
@@ -75,7 +75,7 @@ public class ProblemInstancesDAO {
 					ps4.setInt(1, pi0.id);
 					ResultSet resultSet4 = ps4.executeQuery();
 					if(!resultSet4.next()) {
-//						pi0.benchmarks = new ArrayList<Benchmark>();
+						pi0.benchmarks = new ArrayList<Benchmark>();
 					}else {
 						resultSet4.beforeFirst();
 						pi0.benchmarks = new ArrayList<Benchmark>();

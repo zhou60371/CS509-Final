@@ -31,7 +31,7 @@ java.sql.Connection conn;
             ResultSet resultSet = ps.executeQuery();
             
             while (resultSet.next()) {
-//                algo = generateAlgorithm(resultSet);
+                algo = generateAlgorithm(resultSet);
             }
             resultSet.close();
             ps.close();
@@ -78,8 +78,8 @@ java.sql.Connection conn;
             ResultSet resultSet = statement.executeQuery(query);
             
             while(resultSet.next()) {
-//            	Algorithm algo = generateAlgorithm(resultSet);
-//            	algos.add(algo);
+            	Algorithm algo = generateAlgorithm(resultSet);
+            	algos.add(algo);
             }
             resultSet.close();
             statement.close();
@@ -98,15 +98,15 @@ java.sql.Connection conn;
     		ps1.setInt(1, id);
     		ResultSet resultSet1 = ps1.executeQuery();
     		while(resultSet1.next()) {
-//    			impleId = resultSet1.getInt("id");
-//    			PreparedStatement ps2 = conn.prepareStatement("DELETE FROM Benchmarks WHERE imple = ?");
-//    			ps2.setInt(1, impleId);
-//    			ps2.executeUpdate();
-//    			ps2.close();
-//    			PreparedStatement ps3 = conn.prepareStatement("DELETE FROM Implementations WHERE id = ?");
-//    			ps3.setInt(1, impleId);
-//    			ps3.executeUpdate();
-//    			ps3.close();
+    			impleId = resultSet1.getInt("id");
+    			PreparedStatement ps2 = conn.prepareStatement("DELETE FROM Benchmarks WHERE imple = ?");
+    			ps2.setInt(1, impleId);
+    			ps2.executeUpdate();
+    			ps2.close();
+    			PreparedStatement ps3 = conn.prepareStatement("DELETE FROM Implementations WHERE id = ?");
+    			ps3.setInt(1, impleId);
+    			ps3.executeUpdate();
+    			ps3.close();
     		}
     		ps1.close();
     		resultSet1.close();
@@ -136,12 +136,12 @@ java.sql.Connection conn;
     	}
     }
     
-//    private Algorithm generateAlgorithm(ResultSet resultSet) throws Exception {
-//        String name  = resultSet.getString("name");
-//        String description = resultSet.getString("description");
-//        int id = resultSet.getInt("id");
-//        int classification = resultSet.getInt("classification");
-//        
-//        return new Algorithm (name, classification, description,id);
-//    }
+    private Algorithm generateAlgorithm(ResultSet resultSet) throws Exception {
+        String name  = resultSet.getString("name");
+        String description = resultSet.getString("description");
+        int id = resultSet.getInt("id");
+        int classification = resultSet.getInt("classification");
+        
+        return new Algorithm (name, classification, description,id);
+    }
 }

@@ -49,15 +49,15 @@ public class ImplementationsDAO {
 			while(!(resultSet.next())) {
 				return null;
 			}
-//			imple = generateImplementation(resultSet);
-//			int algo = resultSet.getInt("algorithm");
-//			query = "SELECT * FROM Algorithms WHERE  id="+ algo +" ;";
-//			resultSet = statement.executeQuery(query);
-//			resultSet.next();
-//			Algorithm algorithm = generateAlgorithm(resultSet);
-//			imple.algo = algorithm;
-//			resultSet.close();
-//            statement.close();
+			imple = generateImplementation(resultSet);
+			int algo = resultSet.getInt("algorithm");
+			query = "SELECT * FROM Algorithms WHERE  id="+ algo +" ;";
+			resultSet = statement.executeQuery(query);
+			resultSet.next();
+			Algorithm algorithm = generateAlgorithm(resultSet);
+			imple.algo = algorithm;
+			resultSet.close();
+            statement.close();
 			return imple;
 		}catch (Exception e) {
             throw new Exception("Failed to get implementation: " + e.getMessage());
@@ -80,20 +80,20 @@ public class ImplementationsDAO {
 		}
 	}
 	
-//	private Implementation generateImplementation(ResultSet resultSet) throws Exception {
-//        String language  = resultSet.getString("language");
-//        String content = resultSet.getString("content");
-//        int id = resultSet.getInt("id");
-//        int algo = resultSet.getInt("algorithm");
-//        
-//        return new Implementation (language, content,id,algo);
-//    }
-//	private Algorithm generateAlgorithm(ResultSet resultSet) throws Exception {
-//        String name  = resultSet.getString("name");
-//        String description = resultSet.getString("description");
-//        int id = resultSet.getInt("id");
-//        int classification = resultSet.getInt("classification");
-//        
-//        return new Algorithm (name, classification, description,id);
-//    }
+	private Implementation generateImplementation(ResultSet resultSet) throws Exception {
+        String language  = resultSet.getString("language");
+        String content = resultSet.getString("content");
+        int id = resultSet.getInt("id");
+        int algo = resultSet.getInt("algorithm");
+        
+        return new Implementation (language, content,id,algo);
+    }
+	private Algorithm generateAlgorithm(ResultSet resultSet) throws Exception {
+        String name  = resultSet.getString("name");
+        String description = resultSet.getString("description");
+        int id = resultSet.getInt("id");
+        int classification = resultSet.getInt("classification");
+        
+        return new Algorithm (name, classification, description,id);
+    }
 }

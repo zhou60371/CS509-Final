@@ -67,14 +67,14 @@ public class ClassificationsDAO {
             if(c.childrenID == null) {
             	var = "";
             }
-//            else if(c.childrenID.length == 1) {
-//            	var  = var + c.childrenID[0];
-//            }else if(c.childrenID.length > 1) {
-//            	var  = var + c.childrenID[0];
-//            	for(int i = 1; i<c.childrenID.length;i++ ) {
-//            		var = var + "," + c.childrenID[i];
-//            	}
-//            }
+            else if(c.childrenID.length == 1) {
+            	var  = var + c.childrenID[0];
+            }else if(c.childrenID.length > 1) {
+            	var  = var + c.childrenID[0];
+            	for(int i = 1; i<c.childrenID.length;i++ ) {
+            		var = var + "," + c.childrenID[i];
+            	}
+            }
             ps.setString(2,  var);
             ps.setInt(3,  c.level);
             ps.setInt(4,c.fatherID);
@@ -93,39 +93,39 @@ public class ClassificationsDAO {
             	return true;
             }
             
-//            String var1 = resultSet.getString("childrenID");
-//            if(var1.equals("")) {
-//            	var1 = Integer.toString(childID);
-//            }else {
-//            	var1 = var1 + ","+ childID;
-//            }
-//            ps = conn.prepareStatement("UPDATE "+ tblName+ " SET childrenID= \""+ var1 +"\" WHERE id ="+c.fatherID+";");
-//            ps.execute();
-//            resultSet.close();
+            String var1 = resultSet.getString("childrenID");
+            if(var1.equals("")) {
+            	var1 = Integer.toString(childID);
+            }else {
+            	var1 = var1 + ","+ childID;
+            }
+            ps = conn.prepareStatement("UPDATE "+ tblName+ " SET childrenID= \""+ var1 +"\" WHERE id ="+c.fatherID+";");
+            ps.execute();
+            resultSet.close();
             return true;
         } catch (Exception e) {
             throw new Exception("Failed to insert classification: " + e.getMessage());
         }
     }
 	
-//	public List<Classification> getAllClassifications() throws Exception{
-//		List<Classification> allClassifications = new ArrayList<>();
-//		try {
-////			Statement statement = conn.createStatement();
-////            String query = "SELECT * FROM " + tblName + ";";
-////            ResultSet resultSet = statement.executeQuery(query);
-////
-////            while (resultSet.next()) {
-////                Classification c = generateClassification(resultSet);
-////                allClassifications.add(c);
-////            }
-////            resultSet.close();
-////            statement.close();
-//            return allClassifications;
-//		}catch(Exception e) {
-//			throw new Exception("Failed in getting classifications: " + e.getMessage());
-//		}
-//	}
+	public List<Classification> getAllClassifications() throws Exception{
+		List<Classification> allClassifications = new ArrayList<>();
+		try {
+			Statement statement = conn.createStatement();
+            String query = "SELECT * FROM " + tblName + ";";
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Classification c = generateClassification(resultSet);
+                allClassifications.add(c);
+            }
+            resultSet.close();
+            statement.close();
+            return allClassifications;
+		}catch(Exception e) {
+			throw new Exception("Failed in getting classifications: " + e.getMessage());
+		}
+	}
 	
 	public Map<String, Classification> getClassificationsHierarchy() throws Exception{
 		Map<String, Classification> map = new HashMap<>();
@@ -152,19 +152,19 @@ public class ClassificationsDAO {
 			String query3 = "SELECT * FROM Algorithms WHERE classification =" + c.id + ";";
 			ResultSet resultSet3 = statement3.executeQuery(query3);
 			while(resultSet3.next() ) {
-//				Algorithm algo =  generateAlgorithm(resultSet3);
-//				//-----------------add implementations
-//				Statement statement5 =  conn.createStatement();
-//				String query5 = "SELECT * FROM Implementations WHERE algorithm =" + algo.id + ";";
-//				ResultSet resultSet5 = statement5.executeQuery(query5);
-//				while(resultSet5.next()) {
-//					Implementation implem =  generateImplementation(resultSet5);
-//					algo.imples.add(implem);
-//				}
-//				statement5.close();
-//				resultSet5.close();
-//				//-----------------add implementations
-//				c.algos.add(algo);
+				Algorithm algo =  generateAlgorithm(resultSet3);
+				//-----------------add implementations
+				Statement statement5 =  conn.createStatement();
+				String query5 = "SELECT * FROM Implementations WHERE algorithm =" + algo.id + ";";
+				ResultSet resultSet5 = statement5.executeQuery(query5);
+				while(resultSet5.next()) {
+					Implementation implem =  generateImplementation(resultSet5);
+					algo.imples.add(implem);
+				}
+				statement5.close();
+				resultSet5.close();
+				//-----------------add implementations
+				c.algos.add(algo);
 			}
 			statement3.close();
 			resultSet3.close();
@@ -213,42 +213,42 @@ public class ClassificationsDAO {
 			PreparedStatement ps1 = conn.prepareStatement("SELECT * FROM "+ tblName +" WHERE id = ?;");
 			ps1.setInt(1, id);
 			ResultSet resultset1 = ps1.executeQuery();
-//			while(resultset1.next()) {
-//				int fatherId = resultset1.getInt("fatherID");
-//				if(fatherId != -1 ) {
-//					PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM " + tblName+ " WHERE id = ?;");
-//					ps2.setInt(1, fatherId);
-//					ResultSet resultset2 = ps2.executeQuery();
-//					resultset2.next();
-//					Classification classification = generateClassification(resultset2);
-//					ps2.close();
-//					resultset2.close();
-//					int[] arrayChildren = classification.childrenID;
-//					int[] newArrayChildren = new int[arrayChildren.length-1];
-//					int j = 0;
-//					for(int i = 0; i< arrayChildren.length ; i++) {
-//						if(arrayChildren[i] != id) {
-//							newArrayChildren[j] = arrayChildren[i];
-//							j++;
-//						}
-//					}
-//					String var  = "";
-//					if(newArrayChildren.length == 1) {
-//						var = var + newArrayChildren[0];
-//					}else if(newArrayChildren.length>1) {
-//						var = var + newArrayChildren[0];
-//						for(int k = 1; k< newArrayChildren.length ; k++) {
-//							var = var + "," + newArrayChildren[k];
-//						}
-//					}
-//					PreparedStatement ps3 = conn.prepareStatement("UPDATE " + tblName+ " SET childrenID = ? WHERE id = ?;");
-//					ps3.setString(1, var);
-//					ps3.setInt(2, fatherId);
-//					ps3.execute();
-//					ps3.close();
-//				}
-//			}
-			//delete classification
+			while(resultset1.next()) {
+				int fatherId = resultset1.getInt("fatherID");
+				if(fatherId != -1 ) {
+					PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM " + tblName+ " WHERE id = ?;");
+					ps2.setInt(1, fatherId);
+					ResultSet resultset2 = ps2.executeQuery();
+					resultset2.next();
+					Classification classification = generateClassification(resultset2);
+					ps2.close();
+					resultset2.close();
+					int[] arrayChildren = classification.childrenID;
+					int[] newArrayChildren = new int[arrayChildren.length-1];
+					int j = 0;
+					for(int i = 0; i< arrayChildren.length ; i++) {
+						if(arrayChildren[i] != id) {
+							newArrayChildren[j] = arrayChildren[i];
+							j++;
+						}
+					}
+					String var  = "";
+					if(newArrayChildren.length == 1) {
+						var = var + newArrayChildren[0];
+					}else if(newArrayChildren.length>1) {
+						var = var + newArrayChildren[0];
+						for(int k = 1; k< newArrayChildren.length ; k++) {
+							var = var + "," + newArrayChildren[k];
+						}
+					}
+					PreparedStatement ps3 = conn.prepareStatement("UPDATE " + tblName+ " SET childrenID = ? WHERE id = ?;");
+					ps3.setString(1, var);
+					ps3.setInt(2, fatherId);
+					ps3.execute();
+					ps3.close();
+				}
+			}
+//			delete classification
 			subDelete(id);
 			return true;
 		}catch(Exception e) {
@@ -262,41 +262,41 @@ public class ClassificationsDAO {
 			ps.setInt(1, id);
 			ResultSet resultSet = ps.executeQuery();
 			while(resultSet.next()) {
-//				Classification classification = generateClassification(resultSet);
-//				ps.close();
-//				resultSet.close();
-//				if(classification.childrenID == null) {
-//					ps = conn.prepareStatement("SELECT * FROM Algorithms WHERE classification = ?");
-//					ps.setInt(1, id);
-//					resultSet = ps.executeQuery();
-//					while(resultSet.next()) {
-//						AlgorithmsDAO algoDao = new AlgorithmsDAO();
-//						algoDao.deleteAlgorithm(resultSet.getInt("id"));
-//					}
-//					ps.close();
-//					resultSet.close();
-//					ps = conn.prepareStatement("DELETE FROM Classifications WHERE id = ?");
-//					ps.setInt(1, id);
-//					ps.execute();
-//					ps.close();
-//				}else {
-//					for(int i = 0; i < classification.childrenID.length; i++) {
-//						subDelete(classification.childrenID[i]);
-//						ps = conn.prepareStatement("SELECT * FROM Algorithms WHERE classification = ?");
-//						ps.setInt(1, id);
-//						resultSet = ps.executeQuery();
-//						while(resultSet.next()) {
-//							AlgorithmsDAO algoDao = new AlgorithmsDAO();
-//							algoDao.deleteAlgorithm(resultSet.getInt("id"));
-//						}
-//						ps.close();
-//						resultSet.close();
-//						ps = conn.prepareStatement("DELETE FROM Classifications WHERE id = ?");
-//						ps.setInt(1, id);
-//						ps.execute();
-//						ps.close();
-//					}
-//				}
+				Classification classification = generateClassification(resultSet);
+				ps.close();
+				resultSet.close();
+				if(classification.childrenID == null) {
+					ps = conn.prepareStatement("SELECT * FROM Algorithms WHERE classification = ?");
+					ps.setInt(1, id);
+					resultSet = ps.executeQuery();
+					while(resultSet.next()) {
+						AlgorithmsDAO algoDao = new AlgorithmsDAO();
+						algoDao.deleteAlgorithm(resultSet.getInt("id"));
+					}
+					ps.close();
+					resultSet.close();
+					ps = conn.prepareStatement("DELETE FROM Classifications WHERE id = ?");
+					ps.setInt(1, id);
+					ps.execute();
+					ps.close();
+				}else {
+					for(int i = 0; i < classification.childrenID.length; i++) {
+						subDelete(classification.childrenID[i]);
+						ps = conn.prepareStatement("SELECT * FROM Algorithms WHERE classification = ?");
+						ps.setInt(1, id);
+						resultSet = ps.executeQuery();
+						while(resultSet.next()) {
+							AlgorithmsDAO algoDao = new AlgorithmsDAO();
+							algoDao.deleteAlgorithm(resultSet.getInt("id"));
+						}
+						ps.close();
+						resultSet.close();
+						ps = conn.prepareStatement("DELETE FROM Classifications WHERE id = ?");
+						ps.setInt(1, id);
+						ps.execute();
+						ps.close();
+					}
+				}
 			}
 		}catch(Exception e){
 			throw new Exception("Failed in deleting classifications in subDelete: " + e.getMessage());
@@ -319,17 +319,17 @@ public class ClassificationsDAO {
 			ps.setInt(1, class2);
 			ResultSet resultSet = ps.executeQuery();
 			while(resultSet.next()) {
-//				int id = resultSet.getInt("id");
-//				if(s.equals("")) {
-//					s += id;
-//				}else {
-//					s += "," + id;
-//				}
-//				PreparedStatement ps2 = conn.prepareStatement("UPDATE Classifications SET fatherID = ? WHERE id = ?;");
-//				ps2.setInt(1, class1);
-//				ps2.setInt(2, id);
-//				ps2.execute();
-//				ps2.close();
+				int id = resultSet.getInt("id");
+				if(s.equals("")) {
+					s += id;
+				}else {
+					s += "," + id;
+				}
+				PreparedStatement ps2 = conn.prepareStatement("UPDATE Classifications SET fatherID = ? WHERE id = ?;");
+				ps2.setInt(1, class1);
+				ps2.setInt(2, id);
+				ps2.execute();
+				ps2.close();
 			}
 			ps.close();
 			resultSet.close();
@@ -344,12 +344,12 @@ public class ClassificationsDAO {
 			ps.setInt(1, class2);
 			resultSet = ps.executeQuery();
 			while(resultSet.next()) {
-//				int algoId = resultSet.getInt("id");
-//				PreparedStatement ps4 = conn.prepareStatement("UPDATE Algorithms SET classification = ? WHERE  id = ?;");
-//				ps4.setInt(1, class1);
-//				ps4.setInt(2, algoId);
-//				ps4.execute();
-//				ps4.close();
+				int algoId = resultSet.getInt("id");
+				PreparedStatement ps4 = conn.prepareStatement("UPDATE Algorithms SET classification = ? WHERE  id = ?;");
+				ps4.setInt(1, class1);
+				ps4.setInt(2, algoId);
+				ps4.execute();
+				ps4.close();
 			}
 			ps.close();
 			resultSet.close();
@@ -360,42 +360,42 @@ public class ClassificationsDAO {
 			resultset1.next();
 			int fatherId = resultset1.getInt("fatherID");
 			if(fatherId != -1 ) {
-//				PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM " + tblName+ " WHERE id = ?;");
-//				ps2.setInt(1, fatherId);
-//				ResultSet resultset2 = ps2.executeQuery();
-//				resultset2.next();
-//				Classification classification = generateClassification(resultset2);
-//				ps2.close();
-//				resultset2.close();
-//				int[] arrayChildren = classification.childrenID;
-//				int[] newArrayChildren = new int[arrayChildren.length-1];
-//				int j = 0;
-//				for(int i = 0; i< arrayChildren.length ; i++) {
-//					if(arrayChildren[i] != class2) {
-//						newArrayChildren[j] = arrayChildren[i];
-//						j++;
-//					}
-//				}
-//				String var  = "";
-//				if(newArrayChildren.length == 1) {
-//					var = var + newArrayChildren[0];
-//				}else if(newArrayChildren.length>1) {
-//					var = var + newArrayChildren[0];
-//					for(int k = 1; k< newArrayChildren.length ; k++) {
-//						var = var + "," + newArrayChildren[k];
-//					}
-//				}
-//				PreparedStatement ps4 = conn.prepareStatement("UPDATE " + tblName+ " SET childrenID = ? WHERE id = ?;");
-//				ps4.setString(1, var);
-//				ps4.setInt(2, fatherId);
-//				ps4.execute();
-//				ps4.close();
+				PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM " + tblName+ " WHERE id = ?;");
+				ps2.setInt(1, fatherId);
+				ResultSet resultset2 = ps2.executeQuery();
+				resultset2.next();
+				Classification classification = generateClassification(resultset2);
+				ps2.close();
+				resultset2.close();
+				int[] arrayChildren = classification.childrenID;
+				int[] newArrayChildren = new int[arrayChildren.length-1];
+				int j = 0;
+				for(int i = 0; i< arrayChildren.length ; i++) {
+					if(arrayChildren[i] != class2) {
+						newArrayChildren[j] = arrayChildren[i];
+						j++;
+					}
+				}
+				String var  = "";
+				if(newArrayChildren.length == 1) {
+					var = var + newArrayChildren[0];
+				}else if(newArrayChildren.length>1) {
+					var = var + newArrayChildren[0];
+					for(int k = 1; k< newArrayChildren.length ; k++) {
+						var = var + "," + newArrayChildren[k];
+					}
+				}
+				PreparedStatement ps4 = conn.prepareStatement("UPDATE " + tblName+ " SET childrenID = ? WHERE id = ?;");
+				ps4.setString(1, var);
+				ps4.setInt(2, fatherId);
+				ps4.execute();
+				ps4.close();
 			}
 			//5.delete classification
-//			ps = conn.prepareStatement("DELETE FROM Classifications WHERE id = ?");
-//			ps.setInt(1, class2);
-//			ps.execute();
-//			ps.close();
+			ps = conn.prepareStatement("DELETE FROM Classifications WHERE id = ?");
+			ps.setInt(1, class2);
+			ps.execute();
+			ps.close();
 			return true;
 		}catch(Exception e) {
 			throw new Exception("Failed in merging classifications: " + e.getMessage());

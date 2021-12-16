@@ -39,31 +39,31 @@ public class UploadProblemInstanceHandler implements RequestHandler<UploadProble
 		ProblemInstance PI = new ProblemInstance(fileAdress, caseType, algo, user);
 		
 		if(dao.uploadProblemInstance(PI)) {
-//			if(logger != null){ logger.log("in createSysProblemInstance"); }
-//			
-//			if (s3 == null) {
-//				logger.log("attach to S3 request");
-//				s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
-//				logger.log("attach to S3 succeed");
-//			}
-//			
-//			String bucket = REAL_BUCKET;
-//			String name = req.algo + "-" + req.caseType + "-" + req.user;
-//			byte[] contents = Base64.getDecoder().decode(req.content);
-//			ByteArrayInputStream bais = new ByteArrayInputStream(contents);
-//			ObjectMetadata omd = new ObjectMetadata();
-//			omd.setContentLength(contents.length);
-//			
-//			// makes the object publicly visible
-//			PutObjectResult res = s3.putObject(new PutObjectRequest("nereidproject", bucket + name, bais, omd)
-//					.withCannedAcl(CannedAccessControlList.PublicRead));
-//			
-//			// if we ever get here, then whole thing was stored
-//			return true;
+			if(logger != null){ logger.log("in createSysProblemInstance"); }
+			
+			if (s3 == null) {
+				logger.log("attach to S3 request");
+				s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
+				logger.log("attach to S3 succeed");
+			}
+			
+			String bucket = REAL_BUCKET;
+			String name = req.algo + "-" + req.caseType + "-" + req.user;
+			byte[] contents = Base64.getDecoder().decode(req.content);
+			ByteArrayInputStream bais = new ByteArrayInputStream(contents);
+			ObjectMetadata omd = new ObjectMetadata();
+			omd.setContentLength(contents.length);
+			
+			// makes the object publicly visible
+			PutObjectResult res = s3.putObject(new PutObjectRequest("nereidproject", bucket + name, bais, omd)
+					.withCannedAcl(CannedAccessControlList.PublicRead));
+			
+			// if we ever get here, then whole thing was stored
+			return true;
 		}
-//		else {
+		else {
 			return false;
-//		}
+		}
 	}
 	
 	@Override 

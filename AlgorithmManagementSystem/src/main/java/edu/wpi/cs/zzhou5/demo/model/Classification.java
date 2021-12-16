@@ -24,15 +24,15 @@ public class Classification {
 		this.algos = new ArrayList<>();
 	}
 	
-//	public Classification(String name,int[] childrenID, int level) {
-//		this.name = name;
-//		this.id = -1;
-//		this.childrenID = childrenID;
-//		this.fatherID = -1;
-//		this.level = level;
-//		this.childern = new HashMap<String, Classification>();
-//		this.algos = new ArrayList<>();
-//	}
+	public Classification(String name,int[] childrenID, int level) {
+		this.name = name;
+		this.id = -1;
+		this.childrenID = childrenID;
+		this.fatherID = -1;
+		this.level = level;
+		this.childern = new HashMap<String, Classification>();
+		this.algos = new ArrayList<>();
+	}
 	
 	public Classification(String name,int fatherID, int level) {
 		this.name = name;
