@@ -1,0 +1,1101 @@
+---
+swagger: "2.0"
+info:
+  description: "nereid project api"
+  version: "1.0.6"
+  title: "Nereid Project"
+# host: "as88kbu9j5.execute-api.us-east-1.amazonaws.com"
+# basePath: "/beta2"
+schemes:
+- "https"
+paths:
+  /addAlgorithm:
+    post:
+      operationId: "requestsAddAlgorithm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "AddAlgorithmRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/AddAlgorithmRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/AddAlgorithmResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:addAlgorithm/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /addClassification:
+    post:
+      operationId: "requestsAddClassification"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "AddClassificationRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/AddClassificationRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/AddClassificationResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:addClassification/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /uploadActivity:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "uploadActivityRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/UploadActivityRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UploadActivityResponse"
+  /reclassifyAlgorithm:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ReclassifyAlgorithmRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/ReclassifyAlgorithmRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/ReclassifyAlgorithmResponse"
+  /mergeSibilingClassification:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "MergeSibilingClassificationRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/MergeSibilingClassificationRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/MergeSibilingClassificationResponse"
+  /getActivitiesForUser:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "GetActivitiesForUserRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/GetActivitiesForUserRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/GetActivitiesForUserResponse"
+      
+  /getRegisteredUsers:
+    get:
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/GetRegisteredUsersResponse"
+  /deleteRegisteredUser/{userName}:
+    post:
+      consumes:
+       - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: userName
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/DeleteRegisteredReponse"
+  /deleteImplementation/{implementationId}:
+    post:
+      consumes:
+       - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: implementationId
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/DeleteImplementationReponse"
+  /deleteClassification/{classificationId}:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: classificationId
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/DeleteClassificationReponse"
+  /deleteAlgorithm/{algoId}:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "algoId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/DeleteAlgorithmReponse"
+    
+  /deleteBenchmark/{benchmarkId}:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "benchmarkId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/DeleteBenchmarkReponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:deleteBenchmark/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            responseTemplates:
+              application/json: "#set($inputRoot = $input.path('$'))\n{\n  \"httpCode\"\
+                \ : \"$inputRoot.httpCode\",\n  \"error\" : \"$inputRoot.error\"\n\
+                }"
+        requestTemplates:
+          application/json: "{\n    \"id\":\"$input.params('benchmarkId')\"\n}"
+        passthroughBehavior: "when_no_templates"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "benchmarkId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /deleteProblemInstance/{probleminstanceid}:
+    post:
+      operationId: "requestsDeleteProblemInstance"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "probleminstanceid"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/DeleteProblemInstanceReponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:deleteProblemInstance/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            responseTemplates:
+              application/json: "#set($inputRoot = $input.path('$'))\n{\n  \"httpCode\"\
+                \ : \"$inputRoot.httpCode\",\n  \"error\" : \"$inputRoot.error\"\n\
+                }"
+        requestTemplates:
+          application/json: "{\n    \"id\":\"$input.params('probleminstanceid')\"\n\
+            }"
+        passthroughBehavior: "when_no_templates"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "probleminstanceid"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /getClassificationsHierarchy:
+    get:
+      operationId: "requestsGetClassificationsHierarychy"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/GetClassificationsHierarchyResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:getClassificationsHierarchy/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /getImplementation:
+    post:
+      operationId: "requestsGetImplementation"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "GetImplementationRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/GetImplementationRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/GetImplementationResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:getImplementation/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /getProblemInstance:
+    post:
+      operationId: "requestsGetProblemInstance"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "GetProblemInstanceRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/GetProblemInstanceRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/GetProblemInstanceResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:getProblemInstance/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /login:
+    post:
+      operationId: "requestLogin"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "LoginRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/LoginRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/LoginResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        "400":
+          description: "400 response"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:userLogin/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /regist:
+    post:
+      operationId: "requestRegist"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "RegistRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/RegistRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/RegistResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        "400":
+          description: "400 response"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:userRegist/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /uploadBenchmark:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "UploadBenchmarkRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/UploadBenchmarkRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UploadBenchmarkReponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:uploadBenchmark/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /uploadImplementation:
+    post:
+      operationId: "requestsUploadAnImplementation"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "UploadImplementationRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/UploadImplementationRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UploadImplementationResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:uploadImplementation/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+  /uploadProblemInstance:
+    post:
+      operationId: "reqeustsUploadProblemInstance"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "UploadProblemInstanceRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/UploadProblemInstanceRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UploadProblemInstanceResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:246810176040:function:uploadProblemInstance/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    options:
+      consumes:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+definitions:
+  GetClassificationsHierarchyResponse:
+    type: "object"
+    required:
+    - "error"
+    - "map"
+    - "statusCode"
+    properties:
+      map:
+        type: "object"
+        properties: {}
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+  UploadProblemInstanceResponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "response"
+    properties:
+      response:
+        type: "string"
+      httpCode:
+        type: "integer"
+  LoginResponse:
+    type: "object"
+    required:
+    - "error"
+    - "result"
+    - "role"
+    - "statusCode"
+    properties:
+      result:
+        type: "string"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+      role:
+        type: "integer"
+  RegistResponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "response"
+    properties:
+      response:
+        type: "string"
+      httpCode:
+        type: "integer"
+  AddAlgorithmRequest:
+    type: "object"
+    required:
+    - "arg1"
+    - "arg2"
+    - "arg3"
+    properties:
+      arg1:
+        type: "string"
+      arg2:
+        type: "integer"
+      arg3:
+        type: "string"
+  RegistRequest:
+    type: "object"
+    properties:
+      arg1:
+        type: "string"
+      arg2:
+        type: "string"
+  GetProblemInstanceRequest:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+  LoginRequest:
+    type: "object"
+    required:
+    - "arg1"
+    - "arg2"
+    properties:
+      arg1:
+        type: "string"
+      arg2:
+        type: "string"
+  UploadImplementationRequest:
+    type: "object"
+    required:
+    - "arg1"
+    - "arg2"
+    - "arg3"
+    properties:
+      arg1:
+        type: "string"
+      arg2:
+        type: "string"
+      arg3:
+        type: "integer"
+  UploadProblemInstanceRequest:
+    type: "object"
+    required:
+    - "algo"
+    - "caseType"
+    - "content"
+    - "user"
+    properties:
+      caseType:
+        type: "integer"
+      content:
+        type: "string"
+      algo:
+        type: "integer"
+      user:
+        type: "string"
+  AddAlgorithmResponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "response"
+    properties:
+      response:
+        type: "string"
+      httpCode:
+        type: "integer"
+  GetImplementationResponse:
+    type: "object"
+    required:
+    - "error"
+    - "httpCode"
+    - "imple"
+    properties:
+      imple:
+        type: "object"
+        properties: {}
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  UploadBenchmarkRequest:
+    type: "object"
+    required:
+    - "L1"
+    - "L2"
+    - "L3"
+    - "cache"
+    - "cores"
+    - "cpu"
+    - "date"
+    - "imple"
+    - "problemInstance"
+    - "runningTime"
+    - "threads"
+    properties:
+      cpu:
+        type: "string"
+      date:
+        type: "string"
+      threads:
+        type: "string"
+      cores:
+        type: "string"
+      L1:
+        type: "string"
+      L2:
+        type: "string"
+      L3:
+        type: "string"
+      cache:
+        type: "string"
+      runningTime:
+        type: "string"
+      imple:
+        type: "integer"
+      problemInstance:
+        type: "integer"
+  UploadActivityRequest:
+    type: "object"
+    required:
+    - "name"
+    - "activity"
+    - "time"
+    properties:
+      name:
+        type: "string"
+      activity:
+        type: "string"
+      time: 
+        type: "string"
+  UploadActivityResponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "response"
+    properties:
+      httpCode:
+        type: "integer"
+      response:
+        type: "string"
+  ReclassifyAlgorithmRequest:
+    type: "object"
+    required:
+    - "algoId"
+    - "classiId"
+    properties:
+      algoId:
+        type: "integer"
+      classiId:
+        type: "integer"
+  ReclassifyAlgorithmResponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "error"
+    properties:
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+    
+  MergeSibilingClassificationRequest:
+    type: "object"
+    required:
+    - "class1"
+    - "class2"
+    properties:
+      class1:
+        type: "integer"
+      class2:
+        type: "integer"
+  MergeSibilingClassificationResponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "error"
+    properties:
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  GetActivitiesForUserRequest:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+  GetActivitiesForUserResponse:
+    type: "object"
+    required:
+    - "activities"
+    - "httpCode"
+    - "error"
+    properties:
+      activities:
+        type: "object"
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  GetRegisteredUsersResponse:
+    type: "object"
+    required:
+    - "users"
+    - "httpCode"
+    - "error"
+    properties:
+      users:
+        type: "object"
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  DeleteRegisteredReponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "error"
+    properties:
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  DeleteImplementationReponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "error"
+    properties:
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  DeleteClassificationReponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "error"
+    properties:
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  DeleteAlgorithmReponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "error"
+    properties:
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  
+  DeleteBenchmarkReponse:
+    type: "object"
+    required:
+    - "error"
+    - "httpCode"
+    properties:
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  GetImplementationRequest:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+  GetProblemInstanceResponse:
+    type: "object"
+    required:
+    - "error"
+    - "httpCode"
+    - "pis"
+    properties:
+      pis:
+        type: "object"
+        properties: {}
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  AddClassificationResponse:
+    type: "object"
+    required:
+    - "httpCode"
+    properties:
+      responses:
+        type: "string"
+      httpCode:
+        type: "integer"
+  DeleteProblemInstanceReponse:
+    type: "object"
+    required:
+    - "error"
+    - "httpCode"
+    properties:
+      httpCode:
+        type: "integer"
+      error:
+        type: "string"
+  UploadImplementationResponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "response"
+    properties:
+      response:
+        type: "string"
+      httpCode:
+        type: "integer"
+  AddClassificationRequest:
+    type: "object"
+    required:
+    - "arg1"
+    - "arg2"
+    - "arg3"
+    properties:
+      arg1:
+        type: "string"
+      arg2:
+        type: "integer"
+      arg3:
+        type: "integer"
+  UploadBenchmarkReponse:
+    type: "object"
+    required:
+    - "httpCode"
+    - "response"
+    properties:
+      httpCode:
+        type: "integer"
+      response:
+        type: "string"
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /aws72/NereidProject/1.0.6
